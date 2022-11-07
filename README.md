@@ -1,4 +1,45 @@
-# Form3 Take Home Exercise
+# Exercise Readme
+## Use Cases
+### Creating An Account
+#### Building An Account
+- To create an account, you must first build one using the included [AccountBuilder](./internal/models/builder.go).
+- The building process begins with a call to `NewAccountBuilder()`. This will require you to provide only the mandatory info required by the Account API.
+####
+- Any other additions can be included by calling another builder method. For example, to add an IBAN, just call `WithIban()` after
+calling the basic method, like so `NewAccountBuilder(params).WithIban(iban)`.
+  - Keep in mind certain fields are not customizable per API docs, for example the field `Type` is always set to `ACCOUNTS` and not changeable.
+  - The Builder was designed to be easily extensible so any future changes are quickly implemented. The restriction detailed above
+    is fixed immediately with a new `WithAccountType()` method.
+####
+- To finalize construction, just call the `Build()` method. Keep in mind this method will enforce validation restrictions.
+#### Calling the API
+- After building an account, just call [Create(account)](./internal/api/accounts/create.go) and the account will be created
+for you. This method will also return error information in case anything went wrong.
+### Fetching An Account
+- Call [Fetch(accountID)](./internal/api/accounts/fetch.go) and the account will be fetched for you. 
+This method will also return error information in case anything went wrong (like an invalid ID).
+### Deleting An Account
+- Call [Delete(accountID, accountVersion)](./internal/api/accounts/delete.go) and the account will be deleted for you.
+  This method will also return error information in case anything went wrong (like an invalid ID or Version).
+
+## Considerations
+- I am new to Go and this is my first real project.
+- The tests are made to execute by running `docker-compose up`. They will not run locally unless the constant [fake-api](./internal/constants.go) is changed to `localhost`.
+  - This `fake-api` matches the hostname of the `accountapi` service in the [docker-compose.yml](docker-compose.yml) file.
+
+## Improvements
+- We could extend the Fake API Service with a Rate Limiter to make sure that an attack on that endpoints doesn't compromise the rest of the service holding that API.
+- In this service we could add a Retry Policy with exponential backoff inside a Circuit Breaker to make sure we retry failed requests but not block the entire flow in case of perpetual timeouts returned by the API, for example.
+- Logging should be added to this service to Log error details in a logging service (for example SumoLogic) in order to be able to triage potential issues and facilitate RCA concerns in case of incident.
+- Another abstraction layer should be added to this service in case the API wants to be extended.
+  - For example, if we want to support more Form3 resources instead of only accounts, we could have a `Form3Client` containing an `AccountClient` that can call `Create()`, `Fetch()`, `Delete()`. This allows us to extend resource support while maintaining clean code.
+## Libraries used
+- [Go UUID](github.com/nu7hatch/gouuid) to generate UUIDs to test the account API.
+- [Go Testify](https://github.com/stretchr/testify) for the testing portion of the exercise.
+- [Go Validator](https://github.com/go-playground/validator) to add validation for the account creation.
+
+#
+# Previous Info: Form3 Take Home Exercise
 
 Engineers at Form3 build highly available distributed systems in a microservices environment. Our take home test is designed to evaluate real world activities that are involved with this role. We recognise that this may not be as mentally challenging and may take longer to implement than some algorithmic tests that are often seen in interview exercises. Our approach however helps ensure that you will be working with a team of engineers with the necessary practical skills for the role (as well as a diverse range of technical wizardry). 
 
