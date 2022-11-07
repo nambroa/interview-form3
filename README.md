@@ -24,7 +24,8 @@ This method will also return error information in case anything went wrong (like
 
 ## Considerations
 - I am new to Go and this is my first real project.
-- The tests are made to execute by running `docker-compose up`. They will not run locally unless the constant [fake-api](./internal/constants.go) is changed to `localhost`.
+- The tests are made to execute by running `docker-compose up`. There is a dependency to this in the constants file. 
+  Specifically in the constant [fake-api](./internal/constants.go). This should be changed if you want to migrate the tests to run locally.
   - This `fake-api` matches the hostname of the `accountapi` service in the [docker-compose.yml](docker-compose.yml) file.
 
 ## Improvements
