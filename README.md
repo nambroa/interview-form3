@@ -29,7 +29,7 @@ This method will also return error information in case anything went wrong (like
   - This `fake-api` matches the hostname of the `accountapi` service in the [docker-compose.yml](docker-compose.yml) file.
 
 ## Improvements
-- We could extend the Fake API Service with a Rate Limiter to make sure that an attack on that endpoints doesn't compromise the rest of the service holding that API.
+- We could extend the Fake API Service with a Rate Limiter to make sure that an attack on that endpoint doesn't compromise the rest of the service holding the API.
 - In this service we could add a Retry Policy with exponential backoff inside a Circuit Breaker to make sure we retry failed requests but not block the entire flow in case of perpetual timeouts returned by the API, for example.
 - Logging should be added to this service to Log error details in a logging service (for example SumoLogic) in order to be able to triage potential issues and facilitate RCA concerns in case of incident.
 - Another abstraction layer should be added to this service in case the API wants to be extended.
