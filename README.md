@@ -3,7 +3,7 @@
 ## Use Cases
 ### Creating An Account
 #### Building An Account
-- To create an account, first build one using the included [AccountBuilder](./internal/models/builder.go).
+- To create an account, first build one using the included [AccountBuilder](./internal/models/builder/builder.go).
 - The building process begins with a call to `NewAccountBuilder()`. This will require you to provide only the mandatory info required by the Account API.
 ####
 - Any other additions can be included by calling another builder method. For example, to add an IBAN, just call `WithIban()` after
