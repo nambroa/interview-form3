@@ -22,13 +22,13 @@ This method will also return error information in case anything went wrong (like
 ### Deleting An Account
 - Call [Delete(accountID, accountVersion)](/internal/api/accounts/delete.go) and the account will be deleted for you.
   This method will also return error information in case anything went wrong (like an invalid ID or Version).
-
 ## Considerations
 - I am new to Go.
-- The tests are made to execute by running `docker-compose up`. There is a dependency to this in the constants file. 
-  Specifically in the constant [fake-api](https://github.com/nambroa/interview-accountapi/blob/master/internal/constants.go#L5). This should be changed if you want to migrate the tests to run locally.
-  - This `fake-api` matches the hostname of the `accountapi` service in the [docker-compose.yml](docker-compose.yml) file.
-
+### Docker
+- As per requested in the instructions README, the tests are made to execute by running `docker-compose up`.
+- This can be seen by the inclusion of the constant [fake-api](https://github.com/nambroa/interview-accountapi/blob/master/internal/constants.go#L5).
+  - The constant matches the [hostname](https://github.com/nambroa/interview-accountapi/blob/master/docker-compose.yml#L24) of the fakeAPI aka `accountapi` (since the instructions clarified that the tests must run against the API and not be mocks).
+  - If you want the tests running on `localhost` in the future, this constant should be changed to reflect that.
 ## Improvements
 - We could extend the Fake API Service with a Rate Limiter to make sure that an attack on that endpoint doesn't compromise the rest of the service holding the API.
 - In this service we could add a Retry Policy with exponential backoff inside a Circuit Breaker to make sure we retry failed requests but not block the entire flow in case of perpetual timeouts returned by the API, for example.
