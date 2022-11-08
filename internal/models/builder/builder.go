@@ -6,13 +6,12 @@ import (
 	"github.com/nambroa/interview-accountapi/internal/models"
 )
 
-// AccountBuilder represents a builder that builds Accounts. It also contains validations for specific fields to stop
-// the creation of invalid accounts before it happens.
-// The definition of a valid account is taken from the restrictions of the documentation and from the swagger API info:
+// AccountBuilder represents a builder that builds Accounts. It also contains validations (inside the Account itself)
+//for specific fields to stop the creation of invalid accounts before it happens.
+// The definition of a valid account is taken from the restrictions of the documentation:
 // https://www.api-docs.form3.tech/api/schemes/fps-direct/accounts/accounts/create-an-account
 // Examples: ID must be UUID, BankID must be max length 11, Bic must be 8 or 11 chars longs, Country must be 2 chars long, etc.
-// This means that the source of truth for what an account is, is the service containing the API.
-// I assume this service is internal to us and thus its constraints must be enforced and tested.
+
 type AccountBuilder struct {
 	account *models.Account
 }
@@ -78,13 +77,12 @@ func (ab *AccountBuilder) WithAccountNumber(number string) *AccountBuilder {
 }
 
 func (ab *AccountBuilder) WithAlternativeNames(alternativeNames []string) *AccountBuilder {
-	// array [3] of string [140]
 	ab.account.Data.Attributes.AlternativeNames = alternativeNames
 	return ab
 }
 
 func (ab *AccountBuilder) WithBaseCurrency(baseCurrency string) *AccountBuilder {
-	ab.account.Data.Attributes.BaseCurrency = baseCurrency // ISO 4217 code  used to identify the base currency of the account. Must be GBP.
+	ab.account.Data.Attributes.BaseCurrency = baseCurrency
 	return ab
 }
 
