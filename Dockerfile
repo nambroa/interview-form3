@@ -10,13 +10,3 @@ RUN go mod download
 
 # Copy interview app to docker container.
 COPY . .
-
-
-# TODO: REMOVE
-# Build the go app and create the binary
-# TODO: Maybe here a command to run the tests????
-#RUN go test ./...
-
-# Expose the port to talk to the app and run the app
-#EXPOSE 4000
-#CMD [ "/form3-interview-app" ]
