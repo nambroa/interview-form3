@@ -52,11 +52,6 @@ services:
       - .:/form3-interview-app
     ports:
       - 4000:4000
-#    healthcheck:
-#      test: ["CMD", "curl", "-f", "http://localhost:8080"]
-#      timeout: 45s
-#      interval: 10s
-#      retries: 10
     command: ["sh","-c","go test ./..."]
     depends_on:
       postgresql:
