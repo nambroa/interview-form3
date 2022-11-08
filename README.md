@@ -4,15 +4,15 @@
 ### Creating An Account
 #### Building An Account
 - To create an account, first build one using the included [AccountBuilder](./internal/models/builder/builder.go).
-- The building process begins with a call to `NewAccountBuilder()`. This will require you to provide only the mandatory info required by the Account API.
+- The building process begins with a call to [NewAccountBuilder()](https://github.com/nambroa/interview-accountapi/blob/master/internal/models/builder/builder.go#L22). This will require you to provide only the mandatory info required by the Account API.
 ####
 - Any other additions can be included by calling another builder method. For example, to add an IBAN, just call `WithIban()` after
 calling the basic method, like so `NewAccountBuilder(params).WithIban(iban)`.
-  - Keep in mind certain fields are not customizable per API docs, for example the field `Type` is always set to `ACCOUNTS` and not changeable.
+  - Keep in mind certain fields are not customizable per API docs. For example the field `Type` is always set to [ACCOUNTS](https://github.com/nambroa/interview-accountapi/blob/master/internal/models/builder/builder.go#L51) and not changeable.
   - The Builder was designed to be easily extensible so any future changes are quickly implemented. The restriction detailed above
     is fixed immediately with a new `WithAccountType()` method.
 ####
-- To finalize construction, just call the `Build()` method. Keep in mind this method will enforce validation restrictions.
+- To finalize construction, just call the [Build()](https://github.com/nambroa/interview-accountapi/blob/master/internal/models/builder/builder.go#L112) method. Keep in mind this method will enforce validation restrictions.
 #### Calling the API
 - After building an account, just call [Create(account)](./internal/api/accounts/create.go) and the account will be created
 for you. This method will also return error information in case anything went wrong.
