@@ -18,8 +18,6 @@ func Fetch(accountID string) (*models.Account, error) {
 	// Fetch account
 	response, err := http.Get(fetchAccountURL)
 
-	log.Println(fetchAccountURL)
-
 	// Process response
 	if err != nil {
 		log.Println("Error found while fetching account:", err)

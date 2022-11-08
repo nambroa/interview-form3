@@ -33,7 +33,6 @@ func Create(payload *models.Account) (*http.Response, error) {
 		body, _ := io.ReadAll(response.Body)
 		if response.StatusCode != http.StatusCreated {
 			log.Println("Response returned error status code:", response.StatusCode)
-			log.Println(response)
 			// Read body and return it in the response as error.
 			return response, errors.New(fmt.Sprintf("Status code: %d. Body: %s", response.StatusCode, string(body)))
 		} else {
