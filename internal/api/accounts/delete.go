@@ -8,6 +8,7 @@ import (
 	"net/http"
 )
 
+// Delete deletes an account based on its ID and Version.
 func Delete(accountID string, version string) (*http.Response, error) {
 	var deleteAccountURL = internal.AccountURL + "/" + accountID + "?version=" + version
 

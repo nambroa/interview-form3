@@ -11,6 +11,7 @@ import (
 	"net/http"
 )
 
+// Fetch fetches an account from the fake API based on its ID.
 func Fetch(accountID string) (*models.Account, error) {
 	var fetchAccountURL = internal.AccountURL + "/" + accountID
 

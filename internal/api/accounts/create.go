@@ -12,6 +12,7 @@ import (
 	"net/http"
 )
 
+// Create sends an account payload to the fake API to create an account. It returns its associated response and error data.
 func Create(payload *models.Account) (*http.Response, error) {
 
 	// Convert account data to json

@@ -108,6 +108,7 @@ func (ab *AccountBuilder) WithStatus(status *models.AccountStatus) *AccountBuild
 	return ab
 }
 
+// Build validates the account inside the builder and returns it alongside validation data.
 func (ab *AccountBuilder) Build() (*models.Account, error) {
 	validate := validator.New()
 	err := validate.Struct(ab.account)
@@ -118,6 +119,7 @@ func (ab *AccountBuilder) Build() (*models.Account, error) {
 	return ab.account, nil
 }
 
+// FromJSON Creates an account builder with an account marshalled from the json byte array. It will not build the account.
 func FromJSON(accountJSON []byte) (*AccountBuilder, error) {
 	var account models.Account
 	err := json.Unmarshal(accountJSON, &account)
