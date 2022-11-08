@@ -20,13 +20,13 @@ for you. This method will also return error information in case anything went wr
 - Call [Fetch(accountID)](./internal/api/accounts/fetch.go) and the account will be fetched for you. 
 This method will also return error information in case anything went wrong (like an invalid ID).
 ### Deleting An Account
-- Call [Delete(accountID, accountVersion)](./internal/api/accounts/delete.go) and the account will be deleted for you.
+- Call [Delete(accountID, accountVersion)](/internal/api/accounts/delete.go) and the account will be deleted for you.
   This method will also return error information in case anything went wrong (like an invalid ID or Version).
 
 ## Considerations
 - I am new to Go.
 - The tests are made to execute by running `docker-compose up`. There is a dependency to this in the constants file. 
-  Specifically in the constant [fake-api](./internal/constants.go). This should be changed if you want to migrate the tests to run locally.
+  Specifically in the constant [fake-api](https://github.com/nambroa/interview-accountapi/blob/master/internal/constants.go#L5). This should be changed if you want to migrate the tests to run locally.
   - This `fake-api` matches the hostname of the `accountapi` service in the [docker-compose.yml](docker-compose.yml) file.
 
 ## Improvements
