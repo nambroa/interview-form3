@@ -4,6 +4,8 @@ import (
 	"github.com/nambroa/interview-accountapi/internal"
 	uuid "github.com/nu7hatch/gouuid"
 	"github.com/stretchr/testify/assert"
+	"net/http"
+	"strconv"
 	"testing"
 )
 
@@ -22,9 +24,10 @@ func TestFetch_ValidCreatedAccount(t *testing.T) {
 	}
 }
 
-func TestFetch_WithNonExistentIDReturnsBadRequest(t *testing.T) {
+func TestFetch_WithNonExistentIDReturnsNotFound(t *testing.T) {
 	fakeID, _ := uuid.NewV4()
 	fetchedAcc, err := Fetch(fakeID.String())
 	assert.NotNil(t, err)
 	assert.Nil(t, fetchedAcc)
+	assert.ErrorContains(t, err, strconv.Itoa(http.StatusNotFound))
 }
