@@ -24,6 +24,7 @@ This method will also return error information in case anything went wrong (like
   This method will also return error information in case anything went wrong (like an invalid ID or Version).
 ## Considerations
 - I am new to Go.
+- This repo was created using the original interview [repo](https://github.com/form3tech-oss/interview-accountapi) as base
 ### Docker
 - As per requested in the instructions README, the tests are made to execute by running `docker-compose up`.
 - This can be seen by the inclusion of the constant [fake-api](https://github.com/nambroa/interview-accountapi/blob/master/internal/constants.go#L5).
@@ -41,7 +42,7 @@ This method will also return error information in case anything went wrong (like
 - [Go Validator](https://github.com/go-playground/validator) to add validation for the account creation.
 
 #
-# Previous Info: Form3 Take Home Exercise
+# Previous README Info: Form3 Take Home Exercise
 
 Engineers at Form3 build highly available distributed systems in a microservices environment. Our take home test is designed to evaluate real world activities that are involved with this role. We recognise that this may not be as mentally challenging and may take longer to implement than some algorithmic tests that are often seen in interview exercises. Our approach however helps ensure that you will be working with a team of engineers with the necessary practical skills for the role (as well as a diverse range of technical wizardry). 
 
